@@ -1,0 +1,1 @@
+var e={deep_work:`深度工作`,collaboration:`协作沟通`,execution:`执行推进`,learning:`学习成长`,admin:`事务处理`},t=Object.entries(e).map(([e,t])=>({value:e,label:t})),n={message:`消息通知`,meeting:`临时会议`,request:`他人请求`,environment:`环境干扰`,fatigue:`疲劳走神`,other:`其他`},r=Object.entries(n).map(([e,t])=>({value:e,label:t}));export{r as i,t as n,n as r,e as t};
