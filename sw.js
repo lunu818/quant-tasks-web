@@ -1,6 +1,6 @@
 // 构建时由 vite.config.ts 的 stampServiceWorker 替换成本次构建的指纹：
 // 文件字节一变，浏览器才会安装新的 Service Worker，客户端才会收到"已更新"提示。
-const BUILD_ID = '538f7c7b8be4';
+const BUILD_ID = '234c681b47f7';
 const CACHE_NAME = `quant-tasks-shell-${BUILD_ID}`;
 const APP_SHELL = [
   './',
