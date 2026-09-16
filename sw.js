@@ -1,4 +1,7 @@
-const CACHE_NAME = 'quant-tasks-shell-v2';
+// 构建时由 vite.config.ts 的 stampServiceWorker 替换成本次构建的指纹：
+// 文件字节一变，浏览器才会安装新的 Service Worker，客户端才会收到"已更新"提示。
+const BUILD_ID = '08edc0d31bfe';
+const CACHE_NAME = `quant-tasks-shell-${BUILD_ID}`;
 const APP_SHELL = [
   './',
   './index.html',
@@ -52,8 +55,10 @@ self.addEventListener('fetch', event => {
   if (url.origin !== self.location.origin) return;
 
   if (request.mode === 'navigate') {
+    // 绕过 HTTP 缓存（GitHub Pages 给 index.html 十分钟 max-age），冷启动必拿最新入口；
+    // 不直接复用 navigate 模式的 Request 构造，旧版 WebKit 会抛错。
     event.respondWith(
-      fetch(request)
+      fetch(request.url, { cache: 'no-cache', credentials: 'same-origin' })
         .then(response => {
           const copy = response.clone();
           void caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
